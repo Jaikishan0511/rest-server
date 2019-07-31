@@ -1,0 +1,21 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "details",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "rest-server"
+  },
+  "keywords": [
+    "experss"
+  ],
+  "author": "jai",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
