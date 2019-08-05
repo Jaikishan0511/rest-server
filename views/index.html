@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Post List</h1>
+    <div>
+      <div id="text1">loading...</div>
+      <div id="text2">api not called</div>
+    </div>
+    <script>
+      axios
+        .get("/post")
+        .then(response => {
+          let output = "";
+          debugger;
+          response.data.data.forEach(function(todo) {
+            output += `
+            <ul>
+                <li>ID: ${todo.id}</li>
+                <li>Title: ${todo.title}</li>
+            </ul>
+            <div id="demo" ></div>
+            `;
+          });
+          document.getElementById("text1").innerHTML = output;
+          return output;
+        })
+        .catch(err => console.log("Something went wrong: ", err))
+        .finally(() => {
+          document.getElementById("text2").innerHTML = "api  called";
+        });
+    </script>
+  </body>
+</html>
