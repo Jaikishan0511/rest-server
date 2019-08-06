@@ -15,15 +15,14 @@
     </div>
     <script>
       axios
-        .get("/post")
+        .get("/api/post")
         .then(response => {
           let output = "";
-          debugger;
           response.data.data.forEach(function(todo) {
             output += `
             <ul>
                 <li>ID: ${todo.id}</li>
-                <li>Title: ${todo.title}</li>
+                <a href="/post-info/${todo.id}"><li>Title: ${todo.title}</li><a>
             </ul>
             <div id="demo" ></div>
             `;
@@ -33,7 +32,7 @@
         })
         .catch(err => console.log("Something went wrong: ", err))
         .finally(() => {
-          document.getElementById("text2").innerHTML = "api  called";
+          document.getElementById("text2").innerHTML = "api called";
         });
     </script>
   </body>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div>This is post info.</div>
+    <div id="postinfo"></div>
+    <div id="commentinfo"></div>
+
+    <div id="text2"></div>
+    <script>
+      const postid = window.location.pathname.split("/")[2];
+      axios
+        .get(`/api/post/${postid}`)
+        .then(response => {
+          const { result } = response.data;
+          const opDiv = document.getElementById("postinfo");
+          if (Object.keys(result).length === 0) {
+            opDiv.innerText = "No relevant post found";
+            return;
+          }
+          opDiv.innerHTML = `
+            <ul>
+                <li>id: ${result.id} </li> 
+                <li>post:${result.title}</li>
+                <li>post:${result.description}</li>
+             </ul>
+            `;
+        })
+        .catch(err => console.log("Something went wrong: ", err))
+        .finally(() => {
+          document.getElementById("text2").innerHTML = "api called";
+        });
+      axios
+        .get(`/api/comment?postid=${postid}`)
+        .then(response => {
+          debugger;
+          const { data } = response.data;
+          const comdiv = document.getElementById("commentinfo");
+          if (data.length === 0) {
+            opDiv.innerText = "No comments";
+            return;
+          }
+          data.forEach(function(tocomment) {
+            comdiv.innerHTML += `
+            <ul>
+                <li> postid:${tocomment.postid}</li>
+                <li> commentid:${tocomment.commentid}</li>
+                <li> commentdata:${tocomment.commentdata}</li>   
+            </ul>
+            `;
+          });
+        })
+        .catch(err => console.log("Something went wrong: ", err))
+        .finally(() => {
+          document.getElementById("text2").innerHTML = "api called";
+        });
+    </script>
+  </body>
+</html>
