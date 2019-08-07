@@ -1,0 +1,94 @@
+ -How to delete a directory which is not empty
+Add sudo at the beginning of the command :
+sudo rm -rf folderName
+sudo rm -r folderName (betterone)
+----------------------------------------------------------------------------------------------------
+Compress
+--------
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+
+Here’s what those switches actually mean:
+
+    -c: Create an archive.
+    -z: Compress the archive with gzip.
+    -v: Display progress in the terminal while creating the archive, also known as “verbose” mode. The v is always optional in these commands, but it’s helpful.
+    -f: Allows you to specify the filename of the archive.
+
+Extract
+-------
+- the following command will extract the contents of the archive.tar.gz file to the /tmp directory.
+
+tar -xzvf archive.tar.gz -C /tmp
+-----------------------------------------------------------------------------------------------------
+-grep
+grep [options] pattern [files]
+
+Options Description
+-c : This prints only a count of the lines that match a pattern
+-h : Display the matched lines, but do not display the filenames.
+-i : Ignores, case for matching
+-l : Displays list of a filenames only.
+-n : Display the matched lines and their line numbers.
+-v : This prints out all the lines that do not matches the pattern
+-e exp : Specifies expression with this option. Can use multiple times.
+-f file : Takes patterns from file, one per line.
+-E : Treats pattern as an extended regular expression (ERE)
+-w : Match whole word
+-o : Print only the matched parts of a matching line,
+ with each such part on a separate output line.
+------------------------------------------------------------------------------------------------------
+VARIABLES 
+    SHELL: This describes the shell that will be interpreting any commands you type in. In most cases, this will be bash by default, but other values can be set if you prefer other options.
+    TERM: This specifies the type of terminal to emulate when running the shell. Different hardware terminals can be emulated for different operating requirements. You usually won't need to worry about this though.
+    USER: The current logged in user.
+    PWD: The current working directory.
+    OLDPWD: The previous working directory. This is kept by the shell in order to switch back to your previous directory by running cd -.
+    LS_COLORS: This defines color codes that are used to optionally add colored output to the ls command. This is used to distinguish different file types and provide more info to the user at a glance.
+    MAIL: The path to the current user's mailbox.
+    PATH: A list of directories that the system will check when looking for commands. When a user types in a command, the system will check directories in this order for the executable.
+    LANG: The current language and localization settings, including character encoding.
+    HOME: The current user's home directory.
+    _: The most recent previously executed command.
+
+In addition to these environmental variables, some shell variables that you'll often see are:
+
+    BASHOPTS: The list of options that were used when bash was executed. This can be useful for finding out if the shell environment will operate in the way you want it to.
+    BASH_VERSION: The version of bash being executed, in human-readable form.
+    BASH_VERSINFO: The version of bash, in machine-readable output.
+    COLUMNS: The number of columns wide that are being used to draw output on the screen.
+    DIRSTACK: The stack of directories that are available with the pushd and popd commands.
+    HISTFILESIZE: Number of lines of command history stored to a file.
+    HISTSIZE: Number of lines of command history allowed in memory.
+    HOSTNAME: The hostname of the computer at this time.
+    IFS: The internal field separator to separate input on the command line. By default, this is a space.
+    PS1: The primary command prompt definition. This is used to define what your prompt looks like when you start a shell session. The PS2 is used to declare secondary prompts for when a command spans multiple lines.
+    SHELLOPTS: Shell options that can be set with the set option.
+    UID: The UID of the current user.
+
+how to get them?
+using "$"
+-------------------------------------------------------------------------------------------------------------------
+how to update ps1?
+ps1 can be updated in .bashrc usind export.
+
+-------------------------------------------------------------------------------------------------------------------
+Export
+export command is used to export a variable or function to the environment of all the child processes running in the current shell.
+
+https://www.computerhope.com/unix/bash/export.html
+
+-----------------------------------------------------------------------------
+how to run two commmand at once?
+-
+ A; B    # Run A and then B, regardless of success of A
+ A && B  # Run B if and only if A succeeded
+ A || B  # Run B if and only if A failed
+ A &     # Run A in background.
+---------------------------------------------------
+where are logs stored in linux envt
+ -/var/log directory
+
+----------------------------------------------------
+What does /etc/hosts do?
+-The /etc/hosts is an operating system file that translate hostnames or domain names to IP addresses. This is useful for testing websites changes or the SSL setup before taking a website publicly live. Attention: This method will only work if the hosts have a static IP address.
+
