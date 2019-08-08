@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="postData">
+      <textarea rows="4" cols="50" name="comment" form="usrform" id="title">
+          Enter text here...</textarea
+      >
+      <br />
+      <textarea
+        rows="4"
+        cols="50"
+        name="comment"
+        form="usrform"
+        id="description"
+      >
+                Enter text here...</textarea
+      >
+      <br />
+      <button onclick="handleSubmit()">Submit</button>
+    </div>
+
+    <script>
+      const postid = window.location.pathname.split("/")[2];
+      axios.get(`/api/post/${postid}`).then(response => {
+        const { result } = response.data;
+        const opDiv = document.getElementById("postData");
+        if (Object.keys(result).length === 0) {
+          window.location.assign(`/`);
+        }
+        return window.location.assign(`/update-info/${postid}`);
+      });
+      const handleSubmit = () => {
+        const postid = window.location.pathname.split("/")[2];
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        axios({
+          method: "put",
+          url: `/api/post/${postid}`,
+          data: {
+            title,
+            description
+          }
+        })
+          .then(response => {
+            window.location.assign(`/post-info/${postid}`);
+          })
+          .catch(err => console.log("Something went wrong: ", err))
+          .finally(() => {
+            document.getElementById("text2").innerHTML = "api called";
+          });
+      };
+    </script>
+  </body>
+</html>

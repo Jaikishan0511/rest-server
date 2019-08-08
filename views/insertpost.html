@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <textarea rows="4" cols="50" name="comment" form="usrform" id="title">
+          Enter text here...</textarea
+      >
+      <br />
+      <textarea
+        rows="4"
+        cols="50"
+        name="comment"
+        form="usrform"
+        id="description"
+      >
+                Enter text here...</textarea
+      >
+      <br />
+      <button onclick="handleSubmit()">Submit</button>
+    </div>
+
+    <script>
+      const handleSubmit = () => {
+        debugger;
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+
+        axios({
+          method: "post",
+          url: "/api/post",
+          data: {
+            title,
+            description
+          }
+        })
+          .then(response => {
+            window.location.assign("/");
+          })
+          .catch(err => console.log("Something went wrong: ", err))
+          .finally(() => {
+            document.getElementById("text2").innerHTML = "api called";
+          });
+      };
+    </script>
+  </body>
+</html>

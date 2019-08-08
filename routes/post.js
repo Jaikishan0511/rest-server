@@ -47,8 +47,9 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/", (req, res) => {
-  index = postdata.findIndex(x => x.id === 2);
+router.put("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  index = postdata.findIndex(x => x.id === id);
   postdata.splice(index, 1, {
     id: 2,
     title: "new title",
@@ -60,9 +61,8 @@ router.put("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  req.params.id = Number(req.params.id);
-  console.log(typeof req.params.id);
-  index = postdata.findIndex(x => x.id === req.params.id);
+  const id = Number(req.params.id);
+  index = postdata.findIndex(x => x.id === id);
   if (index > -1) {
     postdata.splice(index, 1);
     return res.json({
