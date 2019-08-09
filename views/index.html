@@ -24,7 +24,9 @@
                 <li>ID: ${todo.id}</li>
                 <a href="/post-info/${todo.id}"><li>Title: ${todo.title}</li><a>
             </ul>
-            <div id="demo" ></div>
+            <button onclick="deletethisnigga(${
+              todo.id
+            });">delete me</button>          
             `;
           });
           document.getElementById("text1").innerHTML = output;
@@ -34,6 +36,19 @@
         .finally(() => {
           document.getElementById("text2").innerHTML = "api called";
         });
+      function deletethisnigga(id) {
+        axios({
+          method: "delete",
+          url: `/api/post/${id}`
+        })
+          .then(response => {
+            window.location.assign(`/`);
+          })
+          .catch(err => console.log("Something went wrong: ", err))
+          .finally(() => {
+            document.getElementById("text2").innerHTML = "api called";
+          });
+      }
     </script>
   </body>
 </html>

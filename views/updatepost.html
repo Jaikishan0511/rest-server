@@ -27,14 +27,21 @@
 
     <script>
       const postid = window.location.pathname.split("/")[2];
-      axios.get(`/api/post/${postid}`).then(response => {
-        const { result } = response.data;
-        const opDiv = document.getElementById("postData");
-        if (Object.keys(result).length === 0) {
-          window.location.assign(`/`);
-        }
-        return window.location.assign(`/update-info/${postid}`);
-      });
+      axios
+        .get(`/api/post/${postid}`)
+        .then(response => {
+          const { result } = response.data;
+          const opDiv = document.getElementById("postinfo");
+          if (Object.keys(result).length === 0) {
+            window.location.assign("/");
+            return;
+          }
+          const title = document.getElementById("title");
+          const description = document.getElementById("description");
+          title.value = result.title;
+          description.value = result.description;
+        })
+        .catch(err => window.location.assign("/"));
       const handleSubmit = () => {
         const postid = window.location.pathname.split("/")[2];
         const title = document.getElementById("title").value;

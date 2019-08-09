@@ -49,12 +49,10 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const id = Number(req.params.id);
+  const { title, description } = req.body;
   index = postdata.findIndex(x => x.id === id);
-  postdata.splice(index, 1, {
-    id: 2,
-    title: "new title",
-    description: "new desc"
-  });
+  const newData = Object.assign(postdata[index], { title, description }, {});
+  postdata.splice(index, 1, newData);
   return res.json({
     data: postdata
   });

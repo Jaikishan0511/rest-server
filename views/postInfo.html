@@ -9,6 +9,11 @@
   </head>
   <body>
     <div>This is post info.</div>
+    <input
+      type="button"
+      value="update me"
+      onclick="window.location = `http://localhost:3000/update-post/${postid}`"
+    />
     <div id="postinfo"></div>
     <div id="commentinfo"></div>
 
@@ -40,7 +45,6 @@
       axios
         .get(`/api/comment?postid=${postid}`)
         .then(response => {
-          debugger;
           const { data } = response.data;
           const comdiv = document.getElementById("commentinfo");
           if (data.length === 0) {
